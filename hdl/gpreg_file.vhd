@@ -33,30 +33,14 @@ architecture rtl of gpreg_file is
 	type memory_t is array(2**ADDR_WIDTH-1 downto 0) of word_t;
 
 	-- Declare the RAM
-	signal ram : memory_t := ( 0 => x"0000",
-                            1 => x"000F",
-                            2 => x"00F0",
-                            3 => x"CF10",
-                            4 => x"9010",
-                            5 => x"0F0F",
-                            6 => x"0FF0",
-                            7 => x"0FFF",
-                            8 => x"F000",
-                            9 => x"ABCD",
-                           10 => x"000B",
-                           11 => x"00B0",
-                           12 => x"00BB",
-                           13 => x"0B00",
-                           14 => x"0B0B",
-                           15 => x"0BB0"
-                                    );
+	signal ram : memory_t;
 
 begin
 
 	process(clk,rst)
 	begin
 	if rst = '1' then
-	    --ram := (others => (others => '0'));
+	    ram := (others => (others => '0'));
         null;
 	elsif(rising_edge(clk)) then
 		if(we = '1') then
